@@ -18,7 +18,7 @@ final class XssFilterTest extends TestCase
     public function testFilterAndBlock()
     {
         $xss = new XssFilter;
-        $xss = $xss->usingFilterAndBlock();
+        $xss = $xss->withFilterAndBlock();
         $this->assertEquals('1; mode=block', $xss->compile());
     }
 }

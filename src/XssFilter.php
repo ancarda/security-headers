@@ -7,7 +7,7 @@ namespace Ancarda\Security\Header;
 /**
  * Helper class to build a simple X-Xss-Protection header.
  *
- * This class is immutable, so the `using` methods return a new instance of this
+ * This class is immutable, so the `with` methods return a new instance of this
  * class with the changes you requested. Any function here that returns an instance
  * of XssFilter isn't making any changes to the current object.
  *
@@ -52,7 +52,7 @@ final class XssFilter
      *
      * @return XssFilter
      */
-    public function usingFilterAndBlock(): XssFilter
+    public function withFilterAndBlock(): XssFilter
     {
         $clone = clone $this;
         $clone->value = '1; mode=block';

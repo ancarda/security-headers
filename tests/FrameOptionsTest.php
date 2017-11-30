@@ -18,25 +18,25 @@ final class FrameOptionsTest extends TestCase
     public function testSameOrigin()
     {
         $xfo = new FrameOptions;
-        $xfo = $xfo->usingAllowFromSelf();
+        $xfo = $xfo->withAllowFromSelf();
         $this->assertContains("SAMEORIGIN", $xfo->compile());
     }
 
     public function testAllowFromURI()
     {
         $xfo = new FrameOptions;
-        $xfo = $xfo->usingAllowFrom('http://example.com/');
+        $xfo = $xfo->withAllowFrom('http://example.com/');
         $this->assertContains("ALLOW-FROM http://example.com/", $xfo->compile());
     }
 
     public function testAllowFromDomain()
     {
         $xfo = new FrameOptions;
-        $xfo = $xfo->usingAllowFrom('example.com/');
+        $xfo = $xfo->withAllowFrom('example.com/');
         $this->assertContains("ALLOW-FROM http://example.com/", $xfo->compile());
-        $xfo = $xfo->usingAllowFrom('http://example.com');
+        $xfo = $xfo->withAllowFrom('http://example.com');
         $this->assertContains("ALLOW-FROM http://example.com/", $xfo->compile());
-        $xfo = $xfo->usingAllowFrom('example.com');
+        $xfo = $xfo->withAllowFrom('example.com');
         $this->assertContains("ALLOW-FROM http://example.com/", $xfo->compile());
     }
 }
