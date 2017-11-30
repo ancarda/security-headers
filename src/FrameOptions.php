@@ -11,7 +11,7 @@ namespace Ancarda\Security\Header;
  * @author  Mark Dain <mark@markdain.net>
  * @license https://choosealicense.com/licenses/mit/ (MIT License)
  */
-class FrameOptions
+final class FrameOptions
 {
     /**
      * The X-Frame-Options value. Defaults to denying all frames.

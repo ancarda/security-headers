@@ -15,7 +15,7 @@ namespace Ancarda\Security\Header;
  * @author  Mark Dain <mark@markdain.net>
  * @license https://choosealicense.com/licenses/mit/ (MIT License)
  */
-class XssFilter
+final class XssFilter
 {
     /**
      * Default to disabling the XSS filter from running.

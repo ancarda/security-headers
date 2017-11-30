@@ -7,7 +7,7 @@ namespace Test;
 use \PHPUnit\Framework\TestCase;
 use \Ancarda\Security\Header\XssFilter;
 
-class XssFilterTest extends TestCase
+final class XssFilterTest extends TestCase
 {
     public function testBlank()
     {

@@ -7,7 +7,7 @@ namespace Test;
 use \PHPUnit\Framework\TestCase;
 use \Ancarda\Security\Header\FrameOptions;
 
-class FrameOptionsTest extends TestCase
+final class FrameOptionsTest extends TestCase
 {
     public function testBlank()
     {

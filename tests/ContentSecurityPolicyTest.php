@@ -7,7 +7,7 @@ namespace Test;
 use \PHPUnit\Framework\TestCase;
 use \Ancarda\Security\Header\ContentSecurityPolicy;
 
-class ContentSecurityPolicyTest extends TestCase
+final class ContentSecurityPolicyTest extends TestCase
 {
     public function testSetScripts()
     {
