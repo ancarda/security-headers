@@ -1,0 +1,5 @@
+#Composer
+vendor/
+
+# macOS
+.DS_Store
