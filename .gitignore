@@ -1,5 +1,9 @@
 #Composer
 vendor/
 
-# macOS
+#macOS
 .DS_Store
+
+#phpunit
+coverage.xml
+coverage/

@@ -26,6 +26,8 @@ To run the unit tests, execute this in the root:
 
 	vendor/bin/phpunit
 
+If the tests are passing, open coverage/index.html in your web browser and inspect the coverage report. The coverage should be 100% for all classes except for the exception classes (which don't have tests).
+
 To check code against the PSR-2 standard, you can run PHP Code Sniffer:
 
 	vendor/bin/phpcs
