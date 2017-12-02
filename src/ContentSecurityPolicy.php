@@ -150,7 +150,7 @@ final class ContentSecurityPolicy
      * @param string $nonce Random nonce, at-least 32 characters
      * @return ContentSecurityPolicy
      */
-    public function withNonce(string $nonce): ContentSecurityPolicy
+    public function withNonce(string $nonce): self
     {
         $clone = clone $this;
         $clone->nonce = $nonce;
@@ -163,7 +163,7 @@ final class ContentSecurityPolicy
      * @param string $domain Domain to add
      * @return ContentSecurityPolicy
      */
-    public function withScriptsFromDomain(string $domain): ContentSecurityPolicy
+    public function withScriptsFromDomain(string $domain): self
     {
         $clone = clone $this;
         $clone->whitelistDomain('scripts', $domain);
@@ -175,7 +175,7 @@ final class ContentSecurityPolicy
      *
      * @return ContentSecurityPolicy
      */
-    public function withScriptsFromSelf(): ContentSecurityPolicy
+    public function withScriptsFromSelf(): self
     {
         $clone = clone $this;
         $clone->self['scripts'] = true;
@@ -188,7 +188,7 @@ final class ContentSecurityPolicy
      *
      * @return ContentSecurityPolicy
      */
-    public function withConnectToSelf(): ContentSecurityPolicy
+    public function withConnectToSelf(): self
     {
         $clone = clone $this;
         $clone->self['connect'] = true;
@@ -201,7 +201,7 @@ final class ContentSecurityPolicy
      * @param string $domain Domain to add
      * @return ContentSecurityPolicy
      */
-    public function withStylesheetsFromDomain(string $domain): ContentSecurityPolicy
+    public function withStylesheetsFromDomain(string $domain): self
     {
         $clone = clone $this;
         $clone->whitelistDomain('stylesheets', $domain);
@@ -213,7 +213,7 @@ final class ContentSecurityPolicy
      *
      * @return ContentSecurityPolicy
      */
-    public function withStylesheetsFromSelf(): ContentSecurityPolicy
+    public function withStylesheetsFromSelf(): self
     {
         $clone = clone $this;
         $clone->self['stylesheets'] = true;
@@ -226,7 +226,7 @@ final class ContentSecurityPolicy
      * @param string $domain Domain to add
      * @return ContentSecurityPolicy
      */
-    public function withImagesFromDomain(string $domain): ContentSecurityPolicy
+    public function withImagesFromDomain(string $domain): self
     {
         $clone = clone $this;
         $clone->whitelistDomain('images', $domain);
@@ -238,7 +238,7 @@ final class ContentSecurityPolicy
      *
      * @return ContentSecurityPolicy
      */
-    public function withImagesFromSelf(): ContentSecurityPolicy
+    public function withImagesFromSelf(): self
     {
         $clone = clone $this;
         $clone->self['images'] = true;

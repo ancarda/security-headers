@@ -52,7 +52,7 @@ final class XssFilter
      *
      * @return XssFilter
      */
-    public function withFilterAndBlock(): XssFilter
+    public function withFilterAndBlock(): self
     {
         $clone = clone $this;
         $clone->value = '1; mode=block';

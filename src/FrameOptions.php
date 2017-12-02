@@ -25,7 +25,7 @@ final class FrameOptions
      *
      * @return FrameOptions
      */
-    public function withAllowFromSelf(): FrameOptions
+    public function withAllowFromSelf(): self
     {
         $clone = clone $this;
         $clone->xfo = 'SAMEORIGIN';
@@ -42,7 +42,7 @@ final class FrameOptions
      * @param string $domain URL including a prefix, but without a path.
      * @return FrameOptions
      */
-    public function withAllowFrom(string $domain): FrameOptions
+    public function withAllowFrom(string $domain): self
     {
         if (substr($domain, -1) !== '/') {
             return $this->withAllowFrom($domain . '/');
