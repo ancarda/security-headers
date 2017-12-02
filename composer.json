@@ -20,6 +20,11 @@
     ],
     "minimum-stability": "stable",
     "prefer-stable": true,
+    "config": {
+        "platform": {
+            "php": "7.0"
+        }
+    },
     "require": {
         "php": ">=7.0"
     },
