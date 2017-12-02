@@ -44,6 +44,7 @@ final class ContentSecurityPolicyTest extends TestCase
         $csp = new ContentSecurityPolicy;
 
         $csp = $csp->withNonce('phpunit');
+        $this->assertEquals($csp->getNonce(), 'phpunit');
         $value = $csp->compile();
         $this->assertContains("style-src 'nonce-phpunit'", $value);
         $this->assertContains("script-src 'nonce-phpunit'", $value);
