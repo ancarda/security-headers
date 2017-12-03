@@ -20,24 +20,25 @@ final class XssFilter
     /**
      * Default to disabling the XSS filter from running.
      *
-     * This is a difficult choice to make but it must be made. Without specifying
-     * an X-Xss-Protection value, the filter defaults to '1' which means to try to
-     * prevent a reflected XSS attack by removing code, but leave the rest of the
-     * page executing.
+     * This is a difficult choice to make but it must be made. Without
+     * specifying an X-Xss-Protection header, the filter defaults to '1' which
+     * means to try to prevent a reflected XSS attack by removing code, but
+     * leave the rest of the page executing.
      *
      * This has been used to steal OAuth tokens on Facebook which is why their
      * X-Xss-Protection header is 0 now.
      *
-     * A filter value of 1 without mode=block allows an attacker to trick the XSS
-     * filter to remove bits of information from the page but continue executing.
+     * A filter value of 1 without mode=block allows an attacker to trick the
+     * XSS filter to remove bits of information from the page but continue
+     * executing.
      *
-     * By applying zero, we request the browser to disable it's XSS filter. With a
-     * strong Content Security Policy and proper HTML handling, XSS is far less
-     * likely to be damaging and can be mitigated through bug fixes both in PHP
-     * and JavaScript.
+     * By applying zero, we request the browser to disable it's XSS filter.
+     * With a strong Content Security Policy and proper input handling,
+     * reflected XSS is less likely to be a problem and should be mitigated
+     * through fixes in the client side JavaScript.
      *
-     * Ultimately, it comes down to where we want to fix XSS problems; by using a
-     * magic filter in the browser, or fixing every bit of code that may be
+     * Ultimately, it comes down to where we want to fix reflected XSS; with a
+     * magic filter in the browser, or by fixing every bit of code that may be
      * affected. I can absolutely appreciate why some prefer the former.
      *
      * Security is very hard. I hope this won't be a huge mistake.
