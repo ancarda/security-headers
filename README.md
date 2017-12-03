@@ -2,6 +2,7 @@
 
 _A PHP library that helps with generating security headers_
 
+[![Latest Stable Version](https://poser.pugx.org/ancarda/security-headers/v/stable)](https://packagist.org/packages/ancarda/security-headers)
 [![Total Downloads](https://poser.pugx.org/ancarda/security-headers/downloads)](https://packagist.org/packages/ancarda/security-headers)
 [![License](https://poser.pugx.org/ancarda/security-headers/license)](https://choosealicense.com/licenses/mit/)
 [![Build Status](https://travis-ci.org/ancarda/security-headers.svg?branch=master)](https://travis-ci.org/ancarda/security-headers)
