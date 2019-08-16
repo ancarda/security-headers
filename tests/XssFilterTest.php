@@ -9,16 +9,16 @@ use \Ancarda\Security\Header\XssFilter;
 
 final class XssFilterTest extends TestCase
 {
-    public function testBlank()
+    public function testBlank(): void
     {
         $xss = new XssFilter();
-        $this->assertEquals('0', $xss->compile());
+        static::assertEquals('0', $xss->compile());
     }
 
-    public function testFilterAndBlock()
+    public function testFilterAndBlock(): void
     {
         $xss = new XssFilter();
         $xss = $xss->withFilterAndBlock();
-        $this->assertEquals('1; mode=block', $xss->compile());
+        static::assertEquals('1; mode=block', $xss->compile());
     }
 }

@@ -11,51 +11,51 @@ use \Ancarda\Security\Header\Exception\ValueTooSmallException;
 
 final class StrictTransportSecurityTest extends TestCase
 {
-    public function testDefaultIs6Months()
+    public function testDefaultIs6Months(): void
     {
         $sts = new StrictTransportSecurity();
-        $this->assertEquals('max-age=15778800', $sts->compile());
+        static::assertEquals('max-age=15778800', $sts->compile());
     }
 
-    public function testRejectingLowTimeoutValues()
+    public function testRejectingLowTimeoutValues(): void
     {
         $sts = new StrictTransportSecurity();
         $this->expectException(ValueTooSmallException::class);
         $sts->withTimeout(300);
     }
 
-    public function testSettingTimeout()
+    public function testSettingTimeout(): void
     {
         $sts = new StrictTransportSecurity();
         $sts = $sts->withTimeout(31557600);
-        $this->assertEquals('max-age=31557600', $sts->compile());
+        static::assertEquals('max-age=31557600', $sts->compile());
     }
 
-    public function testAllowBypassingTimeoutWarning()
+    public function testAllowBypassingTimeoutWarning(): void
     {
         $sts = new StrictTransportSecurity();
         $sts = $sts->withTimeoutUnsafe(300);
-        $this->assertEquals('max-age=300', $sts->compile());
+        static::assertEquals('max-age=300', $sts->compile());
     }
 
-    public function testSubdomains()
+    public function testSubdomains(): void
     {
         $sts = new StrictTransportSecurity();
         $sts = $sts->withSubdomains();
-        $this->assertEquals('max-age=15778800; includeSubDomains', $sts->compile());
+        static::assertEquals('max-age=15778800; includeSubDomains', $sts->compile());
     }
 
-    public function testRejectingPreloadWithoutSubdomains()
+    public function testRejectingPreloadWithoutSubdomains(): void
     {
         $sts = new StrictTransportSecurity();
         $this->expectException(SupportingDirectiveNotActivatedException::class);
         $sts->withPreload();
     }
 
-    public function testPreload()
+    public function testPreload(): void
     {
         $sts = new StrictTransportSecurity();
         $sts = $sts->withSubdomains()->withPreload();
-        $this->assertEquals('max-age=15778800; includeSubDomains; preload', $sts->compile());
+        static::assertEquals('max-age=15778800; includeSubDomains; preload', $sts->compile());
     }
 }

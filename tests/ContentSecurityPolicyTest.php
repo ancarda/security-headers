@@ -9,56 +9,56 @@ use \Ancarda\Security\Header\ContentSecurityPolicy;
 
 final class ContentSecurityPolicyTest extends TestCase
 {
-    public function testSetScripts()
+    public function testSetScripts(): void
     {
         $csp = new ContentSecurityPolicy();
 
         $csp = $csp->withScriptsFromSelf();
-        $this->assertContains("script-src 'self'", $csp->compile());
+        static::assertContains("script-src 'self'", $csp->compile());
         $csp = $csp->withScriptsFromDomain('example.com');
-        $this->assertContains("script-src 'self' example.com", $csp->compile());
+        static::assertContains("script-src 'self' example.com", $csp->compile());
     }
 
-    public function testSetStylesheets()
+    public function testSetStylesheets(): void
     {
         $csp = new ContentSecurityPolicy();
 
         $csp = $csp->withStylesheetsFromSelf();
-        $this->assertContains("style-src 'self'", $csp->compile());
+        static::assertContains("style-src 'self'", $csp->compile());
         $csp = $csp->withStylesheetsFromDomain('example.com');
-        $this->assertContains("style-src 'self' example.com", $csp->compile());
+        static::assertContains("style-src 'self' example.com", $csp->compile());
     }
 
-    public function testSetImages()
+    public function testSetImages(): void
     {
         $csp = new ContentSecurityPolicy();
 
         $csp = $csp->withImagesFromSelf();
-        $this->assertContains("img-src 'self'", $csp->compile());
+        static::assertContains("img-src 'self'", $csp->compile());
         $csp = $csp->withImagesFromDomain('example.com');
-        $this->assertContains("img-src 'self' example.com", $csp->compile());
+        static::assertContains("img-src 'self' example.com", $csp->compile());
     }
 
-    public function testSetNonce()
+    public function testSetNonce(): void
     {
         $csp = new ContentSecurityPolicy();
 
         $csp = $csp->withNonce('phpunit');
-        $this->assertEquals($csp->getNonce(), 'phpunit');
+        static::assertEquals($csp->getNonce(), 'phpunit');
         $value = $csp->compile();
-        $this->assertContains("style-src 'nonce-phpunit'", $value);
-        $this->assertContains("script-src 'nonce-phpunit'", $value);
+        static::assertContains("style-src 'nonce-phpunit'", $value);
+        static::assertContains("script-src 'nonce-phpunit'", $value);
     }
 
-    public function testConnect()
+    public function testConnect(): void
     {
         $csp = new ContentSecurityPolicy();
 
         $csp = $csp->withConnectToSelf();
-        $this->assertContains("connect-src 'self'", $csp->compile());
+        static::assertContains("connect-src 'self'", $csp->compile());
     }
 
-    public function testChaining()
+    public function testChaining(): void
     {
         $csp = new ContentSecurityPolicy();
 
@@ -71,8 +71,8 @@ final class ContentSecurityPolicyTest extends TestCase
             ->withNonce('phpunit-chain')
             ->compile();
 
-        $this->assertContains("img-src 'self' example.com 'nonce-phpunit-chain'", $value);
-        $this->assertContains("script-src 'self' js.example.com 'nonce-phpunit-chain'", $value);
-        $this->assertContains("connect-src 'self'", $value);
+        static::assertContains("img-src 'self' example.com 'nonce-phpunit-chain'", $value);
+        static::assertContains("script-src 'self' js.example.com 'nonce-phpunit-chain'", $value);
+        static::assertContains("connect-src 'self'", $value);
     }
 }

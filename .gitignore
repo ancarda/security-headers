@@ -7,3 +7,6 @@ vendor/
 #phpunit
 coverage.xml
 coverage/
+
+#Infection
+infection.log

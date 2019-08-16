@@ -9,34 +9,34 @@ use \Ancarda\Security\Header\FrameOptions;
 
 final class FrameOptionsTest extends TestCase
 {
-    public function testBlank()
+    public function testBlank(): void
     {
         $xfo = new FrameOptions();
-        $this->assertEquals("DENY", $xfo->compile());
+        static::assertEquals("DENY", $xfo->compile());
     }
 
-    public function testSameOrigin()
+    public function testSameOrigin(): void
     {
         $xfo = new FrameOptions();
         $xfo = $xfo->withAllowFromSelf();
-        $this->assertEquals("SAMEORIGIN", $xfo->compile());
+        static::assertEquals("SAMEORIGIN", $xfo->compile());
     }
 
-    public function testAllowFromURI()
+    public function testAllowFromURI(): void
     {
         $xfo = new FrameOptions();
         $xfo = $xfo->withAllowFrom('http://example.com/');
-        $this->assertEquals("ALLOW-FROM http://example.com/", $xfo->compile());
+        static::assertEquals("ALLOW-FROM http://example.com/", $xfo->compile());
     }
 
-    public function testAllowFromDomain()
+    public function testAllowFromDomain(): void
     {
         $xfo = new FrameOptions();
         $xfo = $xfo->withAllowFrom('example.com/');
-        $this->assertEquals("ALLOW-FROM http://example.com/", $xfo->compile());
+        static::assertEquals("ALLOW-FROM http://example.com/", $xfo->compile());
         $xfo = $xfo->withAllowFrom('http://example.com');
-        $this->assertEquals("ALLOW-FROM http://example.com/", $xfo->compile());
+        static::assertEquals("ALLOW-FROM http://example.com/", $xfo->compile());
         $xfo = $xfo->withAllowFrom('example.com');
-        $this->assertEquals("ALLOW-FROM http://example.com/", $xfo->compile());
+        static::assertEquals("ALLOW-FROM http://example.com/", $xfo->compile());
     }
 }

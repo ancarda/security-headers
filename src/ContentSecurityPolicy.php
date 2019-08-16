@@ -57,7 +57,7 @@ final class ContentSecurityPolicy
      * Array of booleans, used to track if access from self for various things is
      * whitelisted or not.
      *
-     * @var array
+     * @var bool[]
      */
     private $self = [
         'connect'     => false,
@@ -254,7 +254,7 @@ final class ContentSecurityPolicy
      */
     private function whitelistDomain(string $bucket, string $domain)
     {
-        if (!in_array($domain, $this->domains[$bucket])) {
+        if (!in_array($domain, $this->domains[$bucket], true)) {
             $this->domains[$bucket][] = $domain;
         }
     }
