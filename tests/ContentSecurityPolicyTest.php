@@ -11,7 +11,7 @@ final class ContentSecurityPolicyTest extends TestCase
 {
     public function testSetScripts()
     {
-        $csp = new ContentSecurityPolicy;
+        $csp = new ContentSecurityPolicy();
 
         $csp = $csp->withScriptsFromSelf();
         $this->assertContains("script-src 'self'", $csp->compile());
@@ -21,7 +21,7 @@ final class ContentSecurityPolicyTest extends TestCase
 
     public function testSetStylesheets()
     {
-        $csp = new ContentSecurityPolicy;
+        $csp = new ContentSecurityPolicy();
 
         $csp = $csp->withStylesheetsFromSelf();
         $this->assertContains("style-src 'self'", $csp->compile());
@@ -31,7 +31,7 @@ final class ContentSecurityPolicyTest extends TestCase
 
     public function testSetImages()
     {
-        $csp = new ContentSecurityPolicy;
+        $csp = new ContentSecurityPolicy();
 
         $csp = $csp->withImagesFromSelf();
         $this->assertContains("img-src 'self'", $csp->compile());
@@ -41,7 +41,7 @@ final class ContentSecurityPolicyTest extends TestCase
 
     public function testSetNonce()
     {
-        $csp = new ContentSecurityPolicy;
+        $csp = new ContentSecurityPolicy();
 
         $csp = $csp->withNonce('phpunit');
         $this->assertEquals($csp->getNonce(), 'phpunit');
@@ -52,7 +52,7 @@ final class ContentSecurityPolicyTest extends TestCase
 
     public function testConnect()
     {
-        $csp = new ContentSecurityPolicy;
+        $csp = new ContentSecurityPolicy();
 
         $csp = $csp->withConnectToSelf();
         $this->assertContains("connect-src 'self'", $csp->compile());
@@ -60,7 +60,7 @@ final class ContentSecurityPolicyTest extends TestCase
 
     public function testChaining()
     {
-        $csp = new ContentSecurityPolicy;
+        $csp = new ContentSecurityPolicy();
 
         $value = $csp
             ->withImagesFromSelf()

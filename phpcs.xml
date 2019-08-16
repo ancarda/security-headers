@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<ruleset name="ancarda/security-headers Coding Standard">
-    <description>PSR2 with modern array syntax</description>
+<ruleset name="Ancarda Coding Standard">
+    <description>PSR-12</description>
 
     <!-- Display progress -->
     <arg value="p"/>
@@ -8,11 +8,8 @@
     <!-- Use color -->
     <arg name="colors"/>
 
-    <!-- Base off PSR2 -->
-    <rule ref="PSR2"/>
-
-    <!-- Ban old array syntax - use [] over array() -->
-    <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
+    <!-- Base off PSR-12 -->
+    <rule ref="PSR12"/>
 
     <!-- Check all directories -->
     <file>src</file>

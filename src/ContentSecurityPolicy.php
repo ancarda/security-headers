@@ -18,14 +18,14 @@ namespace Ancarda\Security\Header;
  *
  * You could use this library as follows:
  *
- *     $csp = new ContentSecurityPolicy;
+ *     $csp = new ContentSecurityPolicy();
  *     $csp = $csp->withScriptsFromDomain('example.com');
  *     $csp = $csp->withStylesheetsFromSelf();
  *     header('Content-SecurityPolicy: ' . $csp->compile());
  *
  * Alternatively, you may chain these calls:
  *
- *     $csp = new ContentSecurityPolicy;
+ *     $csp = new ContentSecurityPolicy();
  *     header('Content-Security-Policy: ' . $csp
  *         ->withScriptsFromDomain('example.com')
  *         ->withStylesheetsFromSelf()

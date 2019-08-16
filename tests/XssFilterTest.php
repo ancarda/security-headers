@@ -11,13 +11,13 @@ final class XssFilterTest extends TestCase
 {
     public function testBlank()
     {
-        $xss = new XssFilter;
+        $xss = new XssFilter();
         $this->assertEquals('0', $xss->compile());
     }
 
     public function testFilterAndBlock()
     {
-        $xss = new XssFilter;
+        $xss = new XssFilter();
         $xss = $xss->withFilterAndBlock();
         $this->assertEquals('1; mode=block', $xss->compile());
     }
