@@ -4,11 +4,17 @@ declare(strict_types=1);
 
 namespace Test;
 
-use \PHPUnit\Framework\TestCase;
-use \Ancarda\Security\Header\FrameOptions;
+use Ancarda\Security\Header\FrameOptions;
+use PHPUnit\Framework\TestCase;
 
 final class FrameOptionsTest extends TestCase
 {
+    public function testImplementsHeaderInterface(): void
+    {
+        $xfo = new FrameOptions();
+        static::assertSame('X-Frame-Options', $xfo->name());
+    }
+
     public function testBlank(): void
     {
         $xfo = new FrameOptions();

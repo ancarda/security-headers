@@ -7,7 +7,6 @@ namespace Ancarda\Security\Header;
 /**
  * Base class for all ancarda/security-headers Exceptions.
  *
- * @package Ancarda_Security_Headers
  * @author  Mark Dain <mark@markdain.net>
  * @license https://choosealicense.com/licenses/mit/ (MIT License)
  */

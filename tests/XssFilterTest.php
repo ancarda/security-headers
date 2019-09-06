@@ -4,11 +4,17 @@ declare(strict_types=1);
 
 namespace Test;
 
-use \PHPUnit\Framework\TestCase;
-use \Ancarda\Security\Header\XssFilter;
+use Ancarda\Security\Header\XssFilter;
+use PHPUnit\Framework\TestCase;
 
 final class XssFilterTest extends TestCase
 {
+    public function testImplementsHeaderInterface(): void
+    {
+        $xss = new XssFilter();
+        static::assertSame('X-Xss-Protection', $xss->name());
+    }
+
     public function testBlank(): void
     {
         $xss = new XssFilter();

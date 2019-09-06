@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Ancarda\Security\Header;
 
+use Ancarda\Security\Header\Exception\ValueTooSmallException;
+use Ancarda\Security\Header\Exception\SupportingDirectiveNotActivatedException;
+
 /**
  * Helper class to build a simple Strict-Transport-Security header.
  *
@@ -33,22 +36,11 @@ namespace Ancarda\Security\Header;
  * policy can be loaded into the source code of popular browsers, which is
  * known as 'Preloading'. See the withPreload() function for more information.
  *
- * @package Ancarda_Security_Headers
  * @author  Mark Dain <mark@markdain.net>
  * @license https://choosealicense.com/licenses/mit/ (MIT License)
  */
-final class StrictTransportSecurity
+final class StrictTransportSecurity implements StrictTransportSecurityInterface
 {
-    /**
-     * @var int The number of seconds usually elapsed in six months (15778800)
-     */
-    const SIX_MONTHS = 15778800;
-
-    /**
-     * @var int The number of seconds usually elapsed in a year (31557600)
-     */
-    const ONE_YEAR = 31557600;
-
     /**
      * @var int Timeout on this policy being active. Defaults to six months.
      */
@@ -64,34 +56,15 @@ final class StrictTransportSecurity
      */
     private $preload = false;
 
-    /**
-     * Returns the compiled Strict-Transport-Security header.
-     *
-     * @return string
-     */
-    public function compile(): string
+    public function name(): string
     {
-        return 'max-age=' . $this->timeout .
-            ($this->subdomains ? '; includeSubDomains' : '') .
-            ($this->preload ? '; preload' : '')
-        ;
+        return 'Strict-Transport-Security';
     }
 
-    /**
-     * Sets the timeout for this policy.
-     *
-     * This function will throw an exception if the given timeout is below six
-     * months. The value cannot be too low, else it loses it's effectiveness,
-     * especially for infrequent visitors.
-     *
-     * @param int $age
-     * @throws Exception\ValueTooSmallException
-     * @return StrictTransportSecurity
-     */
-    public function withTimeout(int $age): self
+    public function withTimeout(int $age): StrictTransportSecurityInterface
     {
         if ($age < self::SIX_MONTHS) {
-            throw new Exception\ValueTooSmallException(
+            throw new ValueTooSmallException(
                 'The max-age directive should be at-least six months (' . self::SIX_MONTHS . '). ' .
                 'The value you have given (' . $age . ') is too small.' . "\r\n" .
                 'If you are testing HSTS and need to bypass this value, you can use withTimeoutUnsafe()'
@@ -103,46 +76,22 @@ final class StrictTransportSecurity
         return $clone;
     }
 
-    /**
-     * Indicates this policy should be applied to subdomains like www.
-     *
-     * @return StrictTransportSecurity
-     */
-    public function withSubdomains(): self
+    public function getTimeout(): int
+    {
+        return $this->timeout;
+    }
+
+    public function withSubdomains(): StrictTransportSecurityInterface
     {
         $clone = clone $this;
         $clone->subdomains = true;
         return $clone;
     }
 
-    /**
-     * Indicates this domain would like to be preloaded.
-     *
-     * The preload list is built into browsers and contains a list of websites
-     * that will only be accessed using HTTPS. This has the same effect as if
-     * a browser had an HSTS header cached, but preloaded entries do not expire
-     * and are naturally always active.
-     *
-     * Once you have added this header, you should submit your site on
-     * https://hstspreload.org/
-     *
-     * **WARNING:** Once you are on the HSTS preload list, it's difficult to
-     * get off as it would require users to update their browsers. Submitting
-     * a preload request (and issuing a preload header) should only be done if
-     * you are very confident in your SSL implementation.
-     *
-     * This function will throw an exception if this policy is not active for
-     * subdomains, as a preload is only applied to an entire domain, never
-     * on a per-subdomain basis.
-     *
-     * @throws Exception\SupportingDirectiveNotActivatedException
-     *     If called without withSubdomains
-     * @return StrictTransportSecurity
-     */
-    public function withPreload(): self
+    public function withPreload(): StrictTransportSecurityInterface
     {
         if (!$this->subdomains) {
-            throw new Exception\SupportingDirectiveNotActivatedException(
+            throw new SupportingDirectiveNotActivatedException(
                 'Preload cannot be applied because this header does not apply to subdomains as well. ' .
                 'You need to add ->withSubdomains() before this ->withPreload() call.'
             );
@@ -169,5 +118,13 @@ final class StrictTransportSecurity
         $clone = clone $this;
         $clone->timeout = $age;
         return $clone;
+    }
+
+    public function compile(): string
+    {
+        return 'max-age=' . $this->timeout .
+            ($this->subdomains ? '; includeSubDomains' : '') .
+            ($this->preload ? '; preload' : '')
+            ;
     }
 }

@@ -4,11 +4,17 @@ declare(strict_types=1);
 
 namespace Test;
 
-use \PHPUnit\Framework\TestCase;
-use \Ancarda\Security\Header\ContentSecurityPolicy;
+use Ancarda\Security\Header\ContentSecurityPolicy;
+use PHPUnit\Framework\TestCase;
 
 final class ContentSecurityPolicyTest extends TestCase
 {
+    public function testImplementsHeaderInterface(): void
+    {
+        $csp = new ContentSecurityPolicy();
+        static::assertSame('Content-Security-Policy', $csp->name());
+    }
+
     public function testSetScripts(): void
     {
         $csp = new ContentSecurityPolicy();
@@ -48,6 +54,15 @@ final class ContentSecurityPolicyTest extends TestCase
         $value = $csp->compile();
         static::assertContains("style-src 'nonce-phpunit'", $value);
         static::assertContains("script-src 'nonce-phpunit'", $value);
+    }
+
+    public function testRandomlyGenerateNonce(): void
+    {
+        $cspA = new ContentSecurityPolicy();
+        $cspB = new ContentSecurityPolicy();
+
+        static::assertSame(32, strlen($cspA->getNonce()));
+        static::assertNotSame($cspA->getNonce(), $cspB->getNonce());
     }
 
     public function testConnect(): void

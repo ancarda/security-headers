@@ -7,15 +7,16 @@ namespace Ancarda\Security\Header;
 /**
  * Helper class to build a simple X-Xss-Protection header.
  *
- * This class is immutable, so the `with` methods return a new instance of this
- * class with the changes you requested. Any function here that returns an instance
- * of XssFilter isn't making any changes to the current object.
+ * @deprecated Deprecated in Chrome. Never implemented in Firefox.
+ *   Removed in Edge
  *
- * @package Ancarda_Security_Headers
+ *   It has largely been replaced by Content-Security-Policy. When your CSP
+ *   policy does not permit `unsafe-inline`, all inline JavaScript won't
+ *   execute, meaning an XSS Filter isn't nearly as useful as it used to be
  * @author  Mark Dain <mark@markdain.net>
  * @license https://choosealicense.com/licenses/mit/ (MIT License)
  */
-final class XssFilter
+final class XssFilter implements XssFilterInterface
 {
     /**
      * Default to disabling the XSS filter from running.
@@ -47,24 +48,18 @@ final class XssFilter
      */
     private $value = '0';
 
-    /**
-     * Request the browser activate it's XSS filter and on suspected reflected
-     * XSS, prevent the page from loading.
-     *
-     * @return XssFilter
-     */
-    public function withFilterAndBlock(): self
+    public function name(): string
+    {
+        return 'X-Xss-Protection';
+    }
+
+    public function withFilterAndBlock(): XssFilterInterface
     {
         $clone = clone $this;
         $clone->value = '1; mode=block';
         return $clone;
     }
 
-    /**
-     * Returns the compiled X-Xss-Protection header value.
-     *
-     * @return string
-     */
     public function compile(): string
     {
         return $this->value;
